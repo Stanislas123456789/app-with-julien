@@ -1,8 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 :root {
-  --facile-red: #e20714;
-  --facile-red-dark: #b8050f;
+  --facile-orange: #f26522;
+  --facile-orange-dark: #d4591a;
+  --facile-green: #5cb85c;
+  --facile-green-dark: #449d44;
   --facile-dark: #1a1a2e;
   --facile-gray-50: #f8f9fa;
   --facile-gray-100: #f1f3f5;
@@ -60,7 +62,7 @@ body {
   align-items: center;
   gap: 10px;
   padding: 14px 16px;
-  background: var(--facile-red);
+  background: var(--facile-orange);
   color: #fff;
 }
 
@@ -101,7 +103,7 @@ body {
 }
 
 .facile-savings-amount {
-  color: var(--facile-red);
+  color: var(--facile-orange);
   font-weight: 700;
 }
 
@@ -137,13 +139,13 @@ body {
 }
 
 .facile-chip:hover {
-  border-color: var(--facile-red);
-  color: var(--facile-red);
+  border-color: var(--facile-orange);
+  color: var(--facile-orange);
 }
 
 .facile-chip.active {
-  background: var(--facile-red);
-  border-color: var(--facile-red);
+  background: var(--facile-orange);
+  border-color: var(--facile-orange);
   color: #fff;
 }
 
@@ -276,7 +278,7 @@ body {
 .facile-price {
   font-size: 1rem;
   font-weight: 800;
-  color: var(--facile-red);
+  color: var(--facile-orange);
   white-space: nowrap;
 }
 
@@ -294,7 +296,7 @@ body {
 
 .facile-cta-btn {
   padding: 6px 12px;
-  background: var(--facile-red);
+  background: var(--facile-green);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -307,7 +309,7 @@ body {
 }
 
 .facile-cta-btn:hover {
-  background: var(--facile-red-dark);
+  background: var(--facile-green-dark);
   transform: translateY(-1px);
 }
 
@@ -325,9 +327,9 @@ body {
 .facile-expand-btn {
   width: 100%;
   padding: 10px 16px;
-  background: #fff;
-  color: var(--facile-red);
-  border: 1.5px solid var(--facile-red);
+  background: var(--facile-green);
+  color: #fff;
+  border: 1.5px solid var(--facile-green);
   border-radius: 8px;
   font-size: 0.8rem;
   font-weight: 700;
@@ -341,8 +343,8 @@ body {
 }
 
 .facile-expand-btn:hover {
-  background: var(--facile-red);
-  color: #fff;
+  background: var(--facile-green-dark);
+  border-color: var(--facile-green-dark);
 }
 
 /* ── Count badge ── */
@@ -352,7 +354,7 @@ body {
   justify-content: center;
   width: 18px;
   height: 18px;
-  background: var(--facile-red);
+  background: rgba(255, 255, 255, 0.3);
   color: #fff;
   border-radius: 50%;
   font-size: 0.65rem;
@@ -360,8 +362,7 @@ body {
 }
 
 .facile-expand-btn:hover .facile-count-badge {
-  background: #fff;
-  color: var(--facile-red);
+  background: rgba(255, 255, 255, 0.4);
 }
 
 /* ── Fullscreen header with back button ── */
@@ -370,7 +371,7 @@ body {
   align-items: center;
   gap: 10px;
   padding: 14px 16px;
-  background: var(--facile-red);
+  background: var(--facile-orange);
   color: #fff;
   flex-shrink: 0;
 }
