@@ -110,6 +110,175 @@ function computePrice(
   return Math.round(base * cityFactor * ageFactor * carAgeFactor * bmFactor);
 }
 
+// ── Energy mock data (used when FACILE_ENERGY_API_KEY is not set) ─────────────
+
+const MOCK_ELECTRICITY_OFFERS = [
+  {
+    offerName: "Energia Verde 24 Mesi",
+    companyName: "Enel Energia",
+    advantages: "Blocco prezzo 24 mesi + €50 di sconto",
+    offerType: "Offerta a prezzo fisso",
+    availablePaymentMethods: ["RID bancario"],
+    standingCharge: "€8.50/mese",
+    consumptions: { tariffType: "Tariffa monoraria", uniquePrice: 0.082 },
+    priceLockDuration: "24 mesi",
+    activationCosts: null,
+    contractTermsPdfUrls: [],
+    offerUrl: "https://www.facile.it/luce-gas/",
+  },
+  {
+    offerName: "Luce Flex",
+    companyName: "Eni Plenitude",
+    advantages: null,
+    offerType: "Offerta a prezzo indicizzato",
+    availablePaymentMethods: ["RID bancario", "Bollettino postale"],
+    standingCharge: "€7.20/mese",
+    consumptions: { tariffType: "Tariffa indicizzata", uniquePrice: "PUN + 0.01€/kWh" },
+    priceLockDuration: null,
+    activationCosts: null,
+    contractTermsPdfUrls: [],
+    offerUrl: "https://www.facile.it/luce-gas/",
+  },
+  {
+    offerName: "Smart Bioraria",
+    companyName: "A2A Energia",
+    advantages: "Tariffa bioraria conveniente",
+    offerType: "Offerta a prezzo fisso",
+    availablePaymentMethods: ["RID bancario"],
+    standingCharge: "€9.00/mese",
+    consumptions: { tariffType: "Tariffa bioraria", peakPrice: 0.091, offPeakPrice: 0.075 },
+    priceLockDuration: "12 mesi",
+    activationCosts: null,
+    contractTermsPdfUrls: [],
+    offerUrl: "https://www.facile.it/luce-gas/",
+  },
+  {
+    offerName: "Casa Luce Plus",
+    companyName: "Illumia",
+    advantages: "Attivazione gratuita",
+    offerType: "Offerta a prezzo fisso",
+    availablePaymentMethods: ["RID bancario", "Bollettino postale"],
+    standingCharge: "€6.90/mese",
+    consumptions: { tariffType: "Tariffa monoraria", uniquePrice: 0.089 },
+    priceLockDuration: "12 mesi",
+    activationCosts: null,
+    contractTermsPdfUrls: [],
+    offerUrl: "https://www.facile.it/luce-gas/",
+  },
+  {
+    offerName: "WOW Energia",
+    companyName: "Acea Energia",
+    advantages: null,
+    offerType: "Offerta a prezzo indicizzato",
+    availablePaymentMethods: ["RID bancario"],
+    standingCharge: "€8.00/mese",
+    consumptions: { tariffType: "Tariffa indicizzata", uniquePrice: "PUN + 0.02€/kWh" },
+    priceLockDuration: null,
+    activationCosts: null,
+    contractTermsPdfUrls: [],
+    offerUrl: "https://www.facile.it/luce-gas/",
+  },
+];
+
+const MOCK_GAS_OFFERS = [
+  {
+    offerName: "Gas Sicuro 12 Mesi",
+    companyName: "Eni Plenitude",
+    advantages: "Prezzo bloccato + fedeltà bonus",
+    offerType: "Offerta a prezzo fisso",
+    availablePaymentMethods: ["RID bancario"],
+    standingCharge: "€6.20/mese",
+    consumptions: { tariffType: "Tariffa monoraria", uniquePrice: 0.42 },
+    priceLockDuration: "12 mesi",
+    activationCosts: null,
+    contractTermsPdfUrls: [],
+    offerUrl: "https://www.facile.it/luce-gas/",
+  },
+  {
+    offerName: "Metano Smart",
+    companyName: "Enel Energia",
+    advantages: null,
+    offerType: "Offerta a prezzo indicizzato",
+    availablePaymentMethods: ["RID bancario", "Bollettino postale"],
+    standingCharge: "€5.80/mese",
+    consumptions: { tariffType: "Tariffa indicizzata", uniquePrice: "PSV + 0.04€/Smc" },
+    priceLockDuration: null,
+    activationCosts: null,
+    contractTermsPdfUrls: [],
+    offerUrl: "https://www.facile.it/luce-gas/",
+  },
+  {
+    offerName: "Gas Famiglia",
+    companyName: "A2A Energia",
+    advantages: "Attivazione gratuita",
+    offerType: "Offerta a prezzo fisso",
+    availablePaymentMethods: ["RID bancario"],
+    standingCharge: "€7.00/mese",
+    consumptions: { tariffType: "Tariffa monoraria", uniquePrice: 0.45 },
+    priceLockDuration: "24 mesi",
+    activationCosts: null,
+    contractTermsPdfUrls: [],
+    offerUrl: "https://www.facile.it/luce-gas/",
+  },
+];
+
+const MOCK_DUAL_FUEL_OFFERS = [
+  {
+    offerName: "Casa Completa 24M",
+    companyName: "Enel Energia",
+    advantages: "Sconto combinato luce+gas + bolletta unica",
+    offerType: "Offerta a prezzo fisso",
+    availablePaymentMethods: ["RID bancario"],
+    standingCharge: "€12.00/mese",
+    consumptionsComponentPower: { tariffType: "Tariffa monoraria", uniquePrice: 0.082 },
+    priceLockDurationComponentPower: "24 mesi",
+    activationCostsComponentPower: null,
+    consumptionsComponentGas: { tariffType: "Tariffa monoraria", uniquePrice: 0.40 },
+    priceLockDurationComponentGas: "24 mesi",
+    activationCostsComponentGas: null,
+    contractTermsPdfUrls: [],
+    offerUrl: "https://www.facile.it/luce-gas/",
+  },
+  {
+    offerName: "Dual Energy Flex",
+    companyName: "Eni Plenitude",
+    advantages: null,
+    offerType: "Offerta a prezzo indicizzato",
+    availablePaymentMethods: ["RID bancario", "Bollettino postale"],
+    standingCharge: "€10.50/mese",
+    consumptionsComponentPower: { tariffType: "Tariffa indicizzata", uniquePrice: "PUN + 0.01€/kWh" },
+    priceLockDurationComponentPower: null,
+    activationCostsComponentPower: null,
+    consumptionsComponentGas: { tariffType: "Tariffa indicizzata", uniquePrice: "PSV + 0.03€/Smc" },
+    priceLockDurationComponentGas: null,
+    activationCostsComponentGas: null,
+    contractTermsPdfUrls: [],
+    offerUrl: "https://www.facile.it/luce-gas/",
+  },
+  {
+    offerName: "Risparmio Totale",
+    companyName: "A2A Energia",
+    advantages: "Attivazione gratuita + 3 mesi scontati",
+    offerType: "Offerta a prezzo fisso",
+    availablePaymentMethods: ["RID bancario"],
+    standingCharge: "€11.00/mese",
+    consumptionsComponentPower: { tariffType: "Tariffa monoraria", uniquePrice: 0.086 },
+    priceLockDurationComponentPower: "12 mesi",
+    activationCostsComponentPower: null,
+    consumptionsComponentGas: { tariffType: "Tariffa monoraria", uniquePrice: 0.43 },
+    priceLockDurationComponentGas: "12 mesi",
+    activationCostsComponentGas: null,
+    contractTermsPdfUrls: [],
+    offerUrl: "https://www.facile.it/luce-gas/",
+  },
+];
+
+const MOCK_OFFERS: Record<string, unknown[]> = {
+  electricity: MOCK_ELECTRICITY_OFFERS,
+  gas: MOCK_GAS_OFFERS,
+  "dual-fuel": MOCK_DUAL_FUEL_OFFERS,
+};
+
 // ── Facile.it Energy API ─────────────────────────────────────────────────────
 
 const ENERGY_API_BASE = "https://api.facile.it/energy/v1";
@@ -236,22 +405,32 @@ const server = new McpServer(
     },
     async ({ city, energy_type }) => {
       try {
-        // 1. Resolve city → ISTAT code
-        const citiesData = await energyFetch("/cities", { name: city }) as {
-          cities: Array<{ name: string; istatCode: string }>;
-        };
-        if (!citiesData.cities?.length) {
-          throw new Error(`Città non trovata: ${city}`);
-        }
-        const { istatCode, name: cityName } = citiesData.cities[0];
-
-        // 2. Fetch offers
-        const offersData = await energyFetch(ENERGY_ENDPOINTS[energy_type], {
-          istatCode,
-        }) as { offers: unknown[] };
-
-        const offers = offersData.offers ?? [];
         const label = ENERGY_TYPE_LABELS[energy_type];
+        const apiKey = process.env.FACILE_ENERGY_API_KEY;
+        let offers: unknown[];
+        let cityName: string;
+
+        if (apiKey && apiKey !== "your_api_key_here") {
+          // 1. Resolve city → ISTAT code
+          const citiesData = await energyFetch("/cities", { name: city }) as {
+            cities: Array<{ name: string; istatCode: string }>;
+          };
+          if (!citiesData.cities?.length) {
+            throw new Error(`Città non trovata: ${city}`);
+          }
+          const { istatCode, name: resolvedCity } = citiesData.cities[0];
+          cityName = resolvedCity;
+
+          // 2. Fetch real offers
+          const offersData = await energyFetch(ENERGY_ENDPOINTS[energy_type], {
+            istatCode,
+          }) as { offers: unknown[] };
+          offers = offersData.offers ?? [];
+        } else {
+          // Fallback: use mock data
+          cityName = city;
+          offers = MOCK_OFFERS[energy_type] ?? [];
+        }
 
         const summaryText =
           `Ho trovato ${offers.length} offerte ${label} per ${cityName}.\n\n` +
@@ -261,7 +440,6 @@ const server = new McpServer(
           structuredContent: {
             offers,
             city_name: cityName,
-            istat_code: istatCode,
             energy_type,
             energy_label: label,
             total: offers.length,

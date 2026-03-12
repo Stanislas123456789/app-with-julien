@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 16px;
+  padding: 14px 16px;
   border-bottom: 1px solid var(--facile-gray-100);
   background: #fff;
   transition: background 0.12s ease;
@@ -18,12 +18,26 @@
   background: var(--facile-gray-50);
 }
 
+.energy-offer-card:nth-child(1) { animation-delay: 0ms; }
+.energy-offer-card:nth-child(2) { animation-delay: 60ms; }
+.energy-offer-card:nth-child(3) { animation-delay: 120ms; }
+.energy-offer-card:nth-child(4) { animation-delay: 180ms; }
+.energy-offer-card:nth-child(5) { animation-delay: 240ms; }
+.energy-offer-card:nth-child(6) { animation-delay: 300ms; }
+
+/* Top-ranked card gets a subtle left accent */
+.energy-offer-top {
+  border-left: 3px solid var(--facile-orange);
+  padding-left: 13px;
+}
+
+/* ── Body ── */
 .energy-offer-body {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 
 .energy-offer-header {
@@ -40,30 +54,45 @@
 }
 
 .energy-offer-name {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--facile-gray-600);
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.energy-price-row {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--facile-orange);
-  margin-top: 2px;
-}
-
-.energy-detail {
-  font-size: 0.68rem;
-  color: var(--facile-gray-600);
+  white-space: nowrap;
 }
 
 .energy-advantages {
   font-size: 0.68rem;
   color: var(--facile-green-dark);
   font-weight: 600;
+}
+
+.energy-details-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.energy-detail {
+  font-size: 0.65rem;
+  color: var(--facile-gray-600);
+}
+
+.energy-payments {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
   margin-top: 2px;
+}
+
+.energy-payment-chip {
+  padding: 1px 6px;
+  background: var(--facile-gray-100);
+  color: var(--facile-gray-600);
+  border-radius: 4px;
+  font-size: 0.58rem;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 /* ── Badges ── */
@@ -87,8 +116,79 @@
   color: var(--facile-orange-dark);
 }
 
-/* ── CTA ── */
-.energy-cta {
+.energy-badge-top {
+  background: var(--facile-orange);
+  color: #fff;
+}
+
+/* ── Price + CTA column ── */
+.energy-price-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
   flex-shrink: 0;
-  padding: 8px 12px;
+}
+
+.energy-price-block {
+  text-align: right;
+}
+
+.energy-price-main {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--facile-orange);
+  white-space: nowrap;
+}
+
+.energy-price-sub {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--facile-gray-600);
+}
+
+.energy-price-extra {
+  font-size: 0.65rem;
+  color: var(--facile-gray-600);
+  margin-top: 2px;
+}
+
+/* ── Empty state ── */
+.energy-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 36px 16px;
+  color: var(--facile-gray-600);
+}
+
+.energy-empty-icon {
+  font-size: 2rem;
+}
+
+.energy-empty-text {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* ── Loading skeleton ── */
+.energy-skeleton {
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.energy-skeleton-row {
+  height: 52px;
+  background: linear-gradient(90deg, var(--facile-gray-100) 25%, var(--facile-gray-50) 50%, var(--facile-gray-100) 75%);
+  background-size: 200% 100%;
+  border-radius: 8px;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
