@@ -1,0 +1,94 @@
+/* ── Energy offer card ── */
+.energy-offer-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--facile-gray-100);
+  background: #fff;
+  transition: background 0.12s ease;
+  animation: cardEntrance 0.3s ease both;
+}
+
+.energy-offer-card:last-child {
+  border-bottom: none;
+}
+
+.energy-offer-card:hover {
+  background: var(--facile-gray-50);
+}
+
+.energy-offer-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.energy-offer-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.energy-company {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--facile-dark);
+}
+
+.energy-offer-name {
+  font-size: 0.75rem;
+  color: var(--facile-gray-600);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.energy-price-row {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--facile-orange);
+  margin-top: 2px;
+}
+
+.energy-detail {
+  font-size: 0.68rem;
+  color: var(--facile-gray-600);
+}
+
+.energy-advantages {
+  font-size: 0.68rem;
+  color: var(--facile-green-dark);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* ── Badges ── */
+.energy-badge {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.energy-badge-fixed {
+  background: #e8f5e9;
+  color: var(--facile-green-dark);
+}
+
+.energy-badge-indexed {
+  background: #fff3e0;
+  color: var(--facile-orange-dark);
+}
+
+/* ── CTA ── */
+.energy-cta {
+  flex-shrink: 0;
+  padding: 8px 12px;
+}

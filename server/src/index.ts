@@ -1,6 +1,8 @@
 import { McpServer } from "skybridge/server";
 import { z } from "zod";
 
+// ── RC Auto mock data ────────────────────────────────────────────────────────
+
 const INSURERS = [
   {
     id: "generali",
@@ -108,83 +110,173 @@ function computePrice(
   return Math.round(base * cityFactor * ageFactor * carAgeFactor * bmFactor);
 }
 
+// ── Facile.it Energy API ─────────────────────────────────────────────────────
+
+const ENERGY_API_BASE = "https://api.facile.it/energy/v1";
+
+async function energyFetch(path: string, params: Record<string, string>) {
+  const apiKey = process.env.FACILE_ENERGY_API_KEY ?? "";
+  const url = new URL(`${ENERGY_API_BASE}${path}`);
+  for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
+  const res = await fetch(url.toString(), {
+    headers: { "X-API-Key": apiKey },
+  });
+  if (!res.ok) {
+    throw new Error(`Energy API error ${res.status}: ${await res.text()}`);
+  }
+  return res.json() as Promise<Record<string, unknown>>;
+}
+
+const ENERGY_TYPE_LABELS: Record<string, string> = {
+  electricity: "Luce",
+  gas: "Gas",
+  "dual-fuel": "Luce & Gas",
+};
+
+const ENERGY_ENDPOINTS: Record<string, string> = {
+  electricity: "/offers/electricity",
+  gas: "/offers/gas",
+  "dual-fuel": "/offers/dual-fuel",
+};
+
+// ── Server ───────────────────────────────────────────────────────────────────
+
 const server = new McpServer(
   { name: "alpic-openai-app", version: "0.0.1" },
   { capabilities: {} }
-).registerWidget(
-  "compare_rc_auto",
-  {
-    description: "Comparatore RC Auto — trova le migliori offerte assicurative",
-  },
-  {
-    description:
-      "Confronta le offerte RC Auto di 8 assicuratori italiani in base a veicolo, città e profilo guidatore. Estrai i parametri dalla richiesta dell'utente in linguaggio naturale.",
-    inputSchema: {
-      car_brand: z.string().describe("Marca dell'auto, es. Fiat"),
-      car_model: z.string().describe("Modello dell'auto, es. Panda"),
-      year: z.number().int().describe("Anno di immatricolazione, es. 2019"),
-      city: z.string().describe("Città di residenza, es. Milano"),
-      driver_age: z.number().int().describe("Età del guidatore principale"),
-      bonus_malus: z
-        .number()
-        .int()
-        .min(1)
-        .max(18)
-        .optional()
-        .describe("Classe bonus/malus (1–18). Default: 14"),
+)
+  .registerWidget(
+    "compare_rc_auto",
+    {
+      description: "Comparatore RC Auto — trova le migliori offerte assicurative",
     },
-  },
-  async ({ car_brand, car_model, year, city, driver_age, bonus_malus }) => {
-    try {
-      const bm = bonus_malus ?? 14;
+    {
+      description:
+        "Confronta le offerte RC Auto di 8 assicuratori italiani in base a veicolo, città e profilo guidatore. Estrai i parametri dalla richiesta dell'utente in linguaggio naturale.",
+      inputSchema: {
+        car_brand: z.string().describe("Marca dell'auto, es. Fiat"),
+        car_model: z.string().describe("Modello dell'auto, es. Panda"),
+        year: z.number().int().describe("Anno di immatricolazione, es. 2019"),
+        city: z.string().describe("Città di residenza, es. Milano"),
+        driver_age: z.number().int().describe("Età del guidatore principale"),
+        bonus_malus: z
+          .number()
+          .int()
+          .min(1)
+          .max(18)
+          .optional()
+          .describe("Classe bonus/malus (1–18). Default: 14"),
+      },
+    },
+    async ({ car_brand, car_model, year, city, driver_age, bonus_malus }) => {
+      try {
+        const bm = bonus_malus ?? 14;
 
-      const offers = INSURERS.map((insurer) => {
-        const price_annual = computePrice(
-          insurer.base,
-          city,
-          driver_age,
-          year,
-          bm
+        const offers = INSURERS.map((insurer) => {
+          const price_annual = computePrice(
+            insurer.base,
+            city,
+            driver_age,
+            year,
+            bm
+          );
+          return {
+            id: insurer.id,
+            name: insurer.name,
+            logo_emoji: insurer.logo_emoji,
+            price_annual,
+            price_monthly: Math.round(price_annual / 12),
+            rating: insurer.stars,
+            coverage_level: insurer.coverage_level,
+            coverage_tags: insurer.coverage_tags,
+            url: "https://www.facile.it/assicurazioni/rc-auto/",
+          };
+        }).sort((a, b) => a.price_annual - b.price_annual);
+
+        const avg_market_price = Math.round(
+          offers.reduce((sum, o) => sum + o.price_annual, 0) / offers.length
         );
+        const best = offers[0];
+        const savings = avg_market_price - best.price_annual;
+        const car_summary = `${car_brand} ${car_model} ${year} – ${city}`;
+        const best_deal = `${best.name} a €${best.price_annual}/anno`;
+
+        const summaryText =
+          `Ho trovato 8 offerte RC Auto per la tua ${car_brand} ${car_model} ${year} a ${city} (${driver_age} anni, classe BM ${bm}).\n\n` +
+          `🏆 Offerta migliore: **${best_deal}** — risparmi **€${savings}** rispetto alla media di mercato (€${avg_market_price}/anno).\n\n` +
+          `Clicca "Vai su Facile.it" per completare il preventivo e attivare la polizza.`;
+
         return {
-          id: insurer.id,
-          name: insurer.name,
-          logo_emoji: insurer.logo_emoji,
-          price_annual,
-          price_monthly: Math.round(price_annual / 12),
-          rating: insurer.stars,
-          coverage_level: insurer.coverage_level,
-          coverage_tags: insurer.coverage_tags,
-          url: "https://www.facile.it/assicurazioni/rc-auto/",
+          structuredContent: { offers, car_summary, avg_market_price, best_deal },
+          content: [{ type: "text" as const, text: summaryText }],
+          isError: false,
         };
-      }).sort((a, b) => a.price_annual - b.price_annual);
-
-      const avg_market_price = Math.round(
-        offers.reduce((sum, o) => sum + o.price_annual, 0) / offers.length
-      );
-      const best = offers[0];
-      const savings = avg_market_price - best.price_annual;
-      const car_summary = `${car_brand} ${car_model} ${year} – ${city}`;
-      const best_deal = `${best.name} a €${best.price_annual}/anno`;
-
-      const summaryText =
-        `Ho trovato 8 offerte RC Auto per la tua ${car_brand} ${car_model} ${year} a ${city} (${driver_age} anni, classe BM ${bm}).\n\n` +
-        `🏆 Offerta migliore: **${best_deal}** — risparmi **€${savings}** rispetto alla media di mercato (€${avg_market_price}/anno).\n\n` +
-        `Clicca "Vai su Facile.it" per completare il preventivo e attivare la polizza.`;
-
-      return {
-        structuredContent: { offers, car_summary, avg_market_price, best_deal },
-        content: [{ type: "text" as const, text: summaryText }],
-        isError: false,
-      };
-    } catch (error) {
-      return {
-        content: [{ type: "text" as const, text: `Errore: ${error}` }],
-        isError: true,
-      };
+      } catch (error) {
+        return {
+          content: [{ type: "text" as const, text: `Errore: ${error}` }],
+          isError: true,
+        };
+      }
     }
-  }
-);
+  )
+  .registerWidget(
+    "compare_tariffe_energia",
+    {
+      description: "Comparatore Tariffe Energia — confronta offerte luce, gas e dual fuel",
+    },
+    {
+      description:
+        "Confronta le tariffe energia (luce, gas o luce+gas) disponibili in una città italiana usando l'API reale di Facile.it. Estrai città e tipo di energia dalla richiesta dell'utente.",
+      inputSchema: {
+        city: z.string().describe("Città italiana dove si trova l'utenza, es. Milano"),
+        energy_type: z
+          .enum(["electricity", "gas", "dual-fuel"])
+          .describe("Tipo di offerta: electricity (luce), gas, dual-fuel (luce e gas)"),
+      },
+    },
+    async ({ city, energy_type }) => {
+      try {
+        // 1. Resolve city → ISTAT code
+        const citiesData = await energyFetch("/cities", { name: city }) as {
+          cities: Array<{ name: string; istatCode: string }>;
+        };
+        if (!citiesData.cities?.length) {
+          throw new Error(`Città non trovata: ${city}`);
+        }
+        const { istatCode, name: cityName } = citiesData.cities[0];
+
+        // 2. Fetch offers
+        const offersData = await energyFetch(ENERGY_ENDPOINTS[energy_type], {
+          istatCode,
+        }) as { offers: unknown[] };
+
+        const offers = offersData.offers ?? [];
+        const label = ENERGY_TYPE_LABELS[energy_type];
+
+        const summaryText =
+          `Ho trovato ${offers.length} offerte ${label} per ${cityName}.\n\n` +
+          `Confronta prezzi, tariffe e vantaggi di ogni operatore e clicca "Vai alle Offerte" per procedere con il contratto su Facile.it.`;
+
+        return {
+          structuredContent: {
+            offers,
+            city_name: cityName,
+            istat_code: istatCode,
+            energy_type,
+            energy_label: label,
+            total: offers.length,
+          },
+          content: [{ type: "text" as const, text: summaryText }],
+          isError: false,
+        };
+      } catch (error) {
+        return {
+          content: [{ type: "text" as const, text: `Errore: ${error}` }],
+          isError: true,
+        };
+      }
+    }
+  );
 
 server.run();
 
