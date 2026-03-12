@@ -1,0 +1,408 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --facile-red: #e20714;
+  --facile-red-dark: #b8050f;
+  --facile-dark: #1a1a2e;
+  --facile-gray-50: #f8f9fa;
+  --facile-gray-100: #f1f3f5;
+  --facile-gray-200: #e9ecef;
+  --facile-gray-400: #adb5bd;
+  --facile-gray-600: #6c757d;
+  --facile-gray-800: #343a40;
+  --facile-gold: #f59e0b;
+  --facile-blue: #2563eb;
+  --facile-blue-light: #eff6ff;
+  --border-radius: 12px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: transparent;
+  color: var(--facile-dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Inline container ── */
+.facile-inline {
+  width: 100%;
+  background: #fff;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--facile-gray-200);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+/* ── Fullscreen container ── */
+.facile-fullscreen {
+  width: 100%;
+  height: 100%;
+  background: var(--facile-gray-50);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Header ── */
+.facile-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--facile-red);
+  color: #fff;
+}
+
+.facile-header-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.facile-header-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.facile-header-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.facile-header-subtitle {
+  font-size: 0.75rem;
+  opacity: 0.9;
+  margin-top: 1px;
+}
+
+/* ── Savings banner ── */
+.facile-savings-banner {
+  background: #fff7ed;
+  border-bottom: 1px solid #fed7aa;
+  padding: 8px 16px;
+  font-size: 0.78rem;
+  color: #92400e;
+  font-weight: 500;
+  text-align: center;
+}
+
+.facile-savings-amount {
+  color: var(--facile-red);
+  font-weight: 700;
+}
+
+/* ── Sort chips ── */
+.facile-sort-bar {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #fff;
+  border-bottom: 1px solid var(--facile-gray-200);
+  flex-shrink: 0;
+}
+
+.facile-sort-label {
+  font-size: 0.72rem;
+  color: var(--facile-gray-600);
+  font-weight: 500;
+  align-self: center;
+  white-space: nowrap;
+}
+
+.facile-chip {
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--facile-gray-200);
+  background: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--facile-gray-600);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.facile-chip:hover {
+  border-color: var(--facile-red);
+  color: var(--facile-red);
+}
+
+.facile-chip.active {
+  background: var(--facile-red);
+  border-color: var(--facile-red);
+  color: #fff;
+}
+
+/* ── Offers list ── */
+.facile-offers-list {
+  overflow-y: auto;
+  flex: 1;
+  padding: 8px 0;
+}
+
+.facile-offers-inline {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Offer card ── */
+.facile-offer-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--facile-gray-100);
+  background: #fff;
+  transition: background 0.12s ease;
+  animation: cardEntrance 0.3s ease both;
+}
+
+.facile-offer-card:last-child {
+  border-bottom: none;
+}
+
+.facile-offer-card:hover {
+  background: var(--facile-gray-50);
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.facile-offer-card:nth-child(1) { animation-delay: 0ms; }
+.facile-offer-card:nth-child(2) { animation-delay: 60ms; }
+.facile-offer-card:nth-child(3) { animation-delay: 120ms; }
+.facile-offer-card:nth-child(4) { animation-delay: 180ms; }
+.facile-offer-card:nth-child(5) { animation-delay: 240ms; }
+.facile-offer-card:nth-child(6) { animation-delay: 300ms; }
+.facile-offer-card:nth-child(7) { animation-delay: 360ms; }
+.facile-offer-card:nth-child(8) { animation-delay: 420ms; }
+
+/* ── Rank badge ── */
+.facile-rank {
+  flex-shrink: 0;
+  width: 24px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* ── Insurer logo + name ── */
+.facile-insurer {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.facile-insurer-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.facile-insurer-emoji {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.facile-insurer-name {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--facile-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.facile-stars {
+  font-size: 0.65rem;
+  color: var(--facile-gold);
+  letter-spacing: -0.5px;
+  margin-top: 2px;
+}
+
+.facile-stars-text {
+  color: var(--facile-gray-600);
+  font-size: 0.65rem;
+}
+
+.facile-coverage-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 5px;
+}
+
+.facile-tag {
+  padding: 2px 6px;
+  background: var(--facile-blue-light);
+  color: var(--facile-blue);
+  border-radius: 4px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ── Price + CTA ── */
+.facile-price-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.facile-price {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--facile-red);
+  white-space: nowrap;
+}
+
+.facile-price-period {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--facile-gray-600);
+}
+
+.facile-price-monthly {
+  font-size: 0.65rem;
+  color: var(--facile-gray-600);
+  white-space: nowrap;
+}
+
+.facile-cta-btn {
+  padding: 6px 12px;
+  background: var(--facile-red);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease, transform 0.1s ease;
+  font-family: inherit;
+}
+
+.facile-cta-btn:hover {
+  background: var(--facile-red-dark);
+  transform: translateY(-1px);
+}
+
+.facile-cta-btn:active {
+  transform: translateY(0);
+}
+
+/* ── Expand button ── */
+.facile-expand-row {
+  padding: 12px 16px;
+  background: var(--facile-gray-50);
+  border-top: 1px solid var(--facile-gray-200);
+}
+
+.facile-expand-btn {
+  width: 100%;
+  padding: 10px 16px;
+  background: #fff;
+  color: var(--facile-red);
+  border: 1.5px solid var(--facile-red);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.facile-expand-btn:hover {
+  background: var(--facile-red);
+  color: #fff;
+}
+
+/* ── Count badge ── */
+.facile-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: var(--facile-red);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.facile-expand-btn:hover .facile-count-badge {
+  background: #fff;
+  color: var(--facile-red);
+}
+
+/* ── Fullscreen header with back button ── */
+.facile-fullscreen-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--facile-red);
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.facile-back-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+  font-family: inherit;
+  flex-shrink: 0;
+}
+
+.facile-back-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.facile-fullscreen-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.facile-fullscreen-subtitle {
+  font-size: 0.72rem;
+  opacity: 0.9;
+  margin-top: 1px;
+}
