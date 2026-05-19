@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EuroTech Federation — Fellows Atlas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --eurotech-blue: #123192;
+      --eurotech-dark: #0f2557;
+      --eurotech-accent: #5cbbf6;
+      --eurotech-lightblue: #4285f4;
+      --eurotech-light: #e8f4fd;
+      --eurotech-bg: #f5f3ed;
+      --ink: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--eurotech-bg); color: var(--ink); font-family: 'Geist', 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    body { min-height: 100vh; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .app { max-width: 1280px; margin: 0 auto; padding: 32px 24px 96px; }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      border-radius: 28px;
+      padding: 64px 56px;
+      color: white;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(92,187,246,0.45) 0%, transparent 50%),
+        radial-gradient(circle at 15% 90%, rgba(66,133,244,0.35) 0%, transparent 50%),
+        linear-gradient(135deg, var(--eurotech-dark) 0%, var(--eurotech-blue) 100%);
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 8px 16px; border-radius: 999px;
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;
+    }
+    .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--eurotech-accent); box-shadow: 0 0 12px var(--eurotech-accent); }
+    h1 { font-size: clamp(40px, 6vw, 64px); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; margin-top: 20px; max-width: 900px; }
+    h1 .accent { color: var(--eurotech-accent); }
+    .lede { font-size: 18px; line-height: 1.6; opacity: 0.85; max-width: 640px; margin-top: 20px; }
+
+    /* STAT STRIP */
+    .stat-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+      margin-top: 40px;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .stat-card .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; font-weight: 600; }
+    .stat-card .value { font-size: 40px; font-weight: 800; margin-top: 6px; letter-spacing: -0.02em; }
+    .stat-card .suffix { font-size: 14px; opacity: 0.7; margin-top: 2px; }
+
+    /* SECTIONS */
+    .section { margin-top: 48px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+    .section-head h2 {
+      font-size: 28px; font-weight: 700; letter-spacing: -0.02em; color: var(--eurotech-dark);
+    }
+    .section-head .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; }
+    @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 1px 2px rgba(15,37,87,0.04);
+    }
+    .card h3 { font-size: 18px; font-weight: 700; color: var(--eurotech-dark); letter-spacing: -0.01em; }
+    .card .card-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    /* BAR CHART */
+    .bars { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+    .bar-row { display: grid; grid-template-columns: 140px 1fr 50px; align-items: center; gap: 12px; font-size: 13px; }
+    .bar-row .country { color: var(--ink); font-weight: 500; display: flex; align-items: center; gap: 8px; }
+    .bar-row .flag { font-size: 16px; line-height: 1; }
+    .bar-track { background: var(--eurotech-light); border-radius: 999px; height: 10px; overflow: hidden; }
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--eurotech-blue), var(--eurotech-accent));
+      border-radius: 999px;
+      transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .bar-row .count { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--eurotech-dark); text-align: right; }
+
+    /* BATCH DONUT */
+    .donut-wrap { display: flex; align-items: center; gap: 24px; margin-top: 24px; }
+    .donut { position: relative; width: 180px; height: 180px; flex-shrink: 0; }
+    .donut svg { transform: rotate(-90deg); }
+    .donut-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .donut-center .big { font-size: 36px; font-weight: 800; color: var(--eurotech-dark); letter-spacing: -0.02em; }
+    .donut-center .small { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 600; }
+    .legend { display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .legend-row { display: flex; align-items: center; gap: 12px; padding: 14px; background: var(--eurotech-bg); border-radius: 12px; }
+    .legend-dot { width: 12px; height: 12px; border-radius: 4px; flex-shrink: 0; }
+    .legend-info { flex: 1; }
+    .legend-info .name { font-weight: 600; color: var(--eurotech-dark); font-size: 14px; }
+    .legend-info .meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .legend-info .pct { font-size: 18px; font-weight: 700; color: var(--eurotech-blue); }
+
+    /* MAP / TREEMAP */
+    .treemap { margin-top: 20px; display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 80px; gap: 6px; }
+    .tile {
+      background: linear-gradient(135deg, var(--eurotech-blue), var(--eurotech-lightblue));
+      color: white; padding: 12px; border-radius: 10px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      overflow: hidden; position: relative; transition: transform 0.3s ease;
+    }
+    .tile:hover { transform: scale(1.03); z-index: 2; box-shadow: 0 12px 32px rgba(18,49,146,0.25); }
+    .tile .tile-flag { font-size: 20px; }
+    .tile .tile-name { font-size: 12px; font-weight: 600; opacity: 0.95; line-height: 1.2; }
+    .tile .tile-count { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+
+    /* FILTER BAR */
+    .filter-bar {
+      display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+      background: white; border: 1px solid var(--border); border-radius: 16px;
+      padding: 12px; margin-top: 20px;
+    }
+    .filter-input {
+      flex: 1; min-width: 200px;
+      border: none; outline: none; padding: 10px 14px; border-radius: 10px;
+      background: var(--eurotech-bg); font-size: 14px;
+      font-family: inherit;
+    }
+    .filter-input:focus { background: var(--eurotech-light); }
+    .chip {
+      padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 500;
+      background: var(--eurotech-bg); color: var(--ink);
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+    .chip:hover { background: var(--eurotech-light); }
+    .chip.active { background: var(--eurotech-blue); color: white; }
+    .chip .num { opacity: 0.6; margin-left: 4px; font-variant-numeric: tabular-nums; }
+    .chip.active .num { opacity: 0.85; }
+
+    /* FELLOW GRID */
+    .fellows-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px; margin-top: 24px;
+    }
+    .fellow-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .fellow-card::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 60px;
+      background: linear-gradient(135deg, var(--eurotech-blue), var(--eurotech-lightblue));
+      z-index: 0;
+    }
+    .fellow-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(18,49,146,0.15);
+      border-color: var(--eurotech-accent);
+    }
+    .fellow-avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      object-fit: cover; border: 4px solid white;
+      background: var(--eurotech-bg);
+      position: relative; z-index: 1; margin-top: 16px;
+      box-shadow: 0 4px 12px rgba(15,37,87,0.12);
+    }
+    .fellow-avatar.placeholder {
+      display: flex; align-items: center; justify-content: center;
+      color: var(--eurotech-blue); font-weight: 700; font-size: 24px;
+    }
+    .fellow-name { font-size: 15px; font-weight: 700; color: var(--eurotech-dark); margin-top: 14px; line-height: 1.3; position: relative; z-index: 1; }
+    .fellow-meta { font-size: 12px; color: var(--muted); margin-top: 4px; display: flex; align-items: center; gap: 4px; position: relative; z-index: 1; }
+    .fellow-batch {
+      margin-top: 10px;
+      padding: 3px 10px; border-radius: 999px;
+      font-size: 11px; font-weight: 600;
+      background: var(--eurotech-light); color: var(--eurotech-blue);
+      position: relative; z-index: 1;
+    }
+    .fellow-batch.b2 { background: #ecfdf5; color: #047857; }
+    .fellow-card .li {
+      position: absolute; top: 12px; right: 12px;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(255,255,255,0.95); display: flex; align-items: center; justify-content: center;
+      z-index: 2; color: var(--eurotech-blue);
+      transition: transform 0.2s;
+    }
+    .fellow-card .li:hover { transform: scale(1.1); background: white; }
+
+    /* MODAL */
+    .modal-bg { position: fixed; inset: 0; background: rgba(15,37,87,0.5); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 100; animation: fadeIn 0.2s; }
+    .modal { background: white; border-radius: 24px; max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 32px; position: relative; animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .modal-close { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border-radius: 50%; background: var(--eurotech-bg); display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--muted); }
+    .modal-close:hover { background: var(--eurotech-light); }
+    .modal-header { display: flex; gap: 20px; align-items: center; margin-bottom: 24px; }
+    .modal-avatar { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 4px solid var(--eurotech-light); flex-shrink: 0; }
+    .modal h3 { font-size: 24px; font-weight: 800; color: var(--eurotech-dark); letter-spacing: -0.02em; }
+    .modal .modal-meta { color: var(--muted); margin-top: 4px; font-size: 14px; }
+    .modal .modal-tags { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .tag { padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: var(--eurotech-light); color: var(--eurotech-blue); }
+    .modal-bio { color: var(--ink); line-height: 1.65; font-size: 14px; white-space: pre-wrap; }
+    .modal-bio-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 600; margin-bottom: 8px; }
+    .modal-cta { margin-top: 24px; display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 12px; background: var(--eurotech-blue); color: white; font-weight: 600; font-size: 14px; transition: all 0.2s; }
+    .modal-cta:hover { background: var(--eurotech-dark); transform: translateY(-1px); }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* INDUSTRY GRID */
+    .industry-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px; margin-top: 20px;
+    }
+    .industry-card {
+      background: linear-gradient(135deg, var(--eurotech-bg), white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .industry-card::before {
+      content: "";
+      position: absolute; bottom: 0; left: 0; height: 4px;
+      width: var(--w, 0%);
+      background: linear-gradient(90deg, var(--eurotech-blue), var(--eurotech-accent));
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .industry-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(15,37,87,0.08); border-color: var(--eurotech-accent); }
+    .industry-card .icon { font-size: 22px; margin-bottom: 8px; }
+    .industry-card .iname { font-size: 13px; font-weight: 600; color: var(--eurotech-dark); }
+    .industry-card .icount { font-size: 26px; font-weight: 800; color: var(--eurotech-blue); letter-spacing: -0.02em; margin-top: 6px; line-height: 1; }
+    .industry-card .ipct { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+    /* ROLE PILLS */
+    .role-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .role-pill {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 16px;
+      background: white; border: 1px solid var(--border); border-radius: 12px;
+      transition: all 0.2s;
+    }
+    .role-pill:hover { border-color: var(--eurotech-blue); transform: translateY(-1px); }
+    .role-pill .rdot { width: 10px; height: 10px; border-radius: 3px; }
+    .role-pill .rname { font-size: 13px; font-weight: 600; color: var(--eurotech-dark); }
+    .role-pill .rcount { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+    /* TAGS on fellow cards */
+    .fellow-tags { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin-top: 8px; position: relative; z-index: 1; min-height: 22px; }
+    .ftag { font-size: 10px; padding: 2px 8px; border-radius: 999px; background: var(--eurotech-bg); color: var(--eurotech-dark); font-weight: 600; }
+
+    /* FOOTER */
+    .foot { margin-top: 64px; text-align: center; color: var(--muted); font-size: 13px; }
+    .foot a { color: var(--eurotech-blue); font-weight: 500; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero { padding: 40px 28px; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .treemap { grid-template-rows: 70px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://esm.sh/react@19.0.0",
+      "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+      "htm": "https://esm.sh/htm@3.1.1"
+    }
+  }
+  </script>
+  <script type="module">
+    import React, { useState, useMemo, useEffect } from 'react';
+    import { createRoot } from 'react-dom/client';
+    import htm from 'htm';
+
+    const html = htm.bind(React.createElement);
+
+    // Country to flag emoji
+    const COUNTRY_FLAGS = {
+      'Germany': '🇩🇪', 'United Kingdom': '🇬🇧', 'Italy': '🇮🇹',
+      'Switzerland': '🇨🇭', 'France': '🇫🇷', 'United States': '🇺🇸',
+      'Netherlands': '🇳🇱', 'Spain': '🇪🇸', 'Bulgaria': '🇧🇬',
+      'Syria': '🇸🇾', 'Belgium': '🇧🇪', 'Denmark': '🇩🇰',
+      'Ireland': '🇮🇪', 'England': '🇬🇧', 'München': '🇩🇪',
+    };
+
+    // Normalize misclassified countries
+    const normalizeCountry = (c) => {
+      if (c === 'München') return 'Germany';
+      if (c === 'England') return 'United Kingdom';
+      return c;
+    };
+
+    // Industry icons + colors
+    const INDUSTRY_META = {
+      'AI/ML':            { icon: '🧠', color: '#7c3aed' },
+      'Biotech/Health':   { icon: '🧬', color: '#059669' },
+      'Robotics/Hardware':{ icon: '🤖', color: '#0891b2' },
+      'Space/Defense':    { icon: '🚀', color: '#dc2626' },
+      'Fintech':          { icon: '💸', color: '#0a66c2' },
+      'Climate/Energy':   { icon: '🌱', color: '#16a34a' },
+      'Quantum/Deep tech':{ icon: '⚛️', color: '#9333ea' },
+      'Developer tools':  { icon: '🛠️', color: '#475569' },
+      'Cybersecurity':    { icon: '🔐', color: '#ea580c' },
+      'Mobility':         { icon: '🚗', color: '#0284c7' },
+      'EdTech':           { icon: '🎓', color: '#0891b2' },
+      'LegalTech':        { icon: '⚖️', color: '#7c2d12' },
+      'Consumer/Marketplace': { icon: '🛍️', color: '#db2777' },
+      'Real Estate':      { icon: '🏛️', color: '#92400e' },
+    };
+    const ROLE_COLORS = {
+      'Founder/Builder':    '#123192',
+      'Researcher/PhD':     '#7c3aed',
+      'Engineer/Developer': '#0891b2',
+      'CEO/CTO/COO':        '#dc2626',
+      'Product/Design':     '#db2777',
+      'Investor/VC':        '#16a34a',
+      'Operator':           '#ea580c',
+      'Student':            '#64748b',
+    };
+
+    function CountUp({ end, duration = 1500, suffix = '' }) {
+      const [n, setN] = useState(0);
+      useEffect(() => {
+        let raf;
+        const start = performance.now();
+        const tick = (now) => {
+          const t = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - t, 3);
+          setN(Math.round(end * eased));
+          if (t < 1) raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+        return () => cancelAnimationFrame(raf);
+      }, [end, duration]);
+      return html`<span>${n}${suffix}</span>`;
+    }
+
+    function Donut({ data, size = 180 }) {
+      const total = data.reduce((s, d) => s + d.value, 0);
+      const r = size / 2 - 14;
+      const c = 2 * Math.PI * r;
+      let offset = 0;
+      return html`
+        <div class="donut" style=${{ width: size, height: size }}>
+          <svg width=${size} height=${size}>
+            <circle cx=${size/2} cy=${size/2} r=${r} fill="none" stroke="#f1f5f9" stroke-width="20" />
+            ${data.map((d, i) => {
+              const len = (d.value / total) * c;
+              const el = html`<circle key=${i} cx=${size/2} cy=${size/2} r=${r} fill="none" stroke=${d.color} stroke-width="20" stroke-dasharray=${`${len} ${c}`} stroke-dashoffset=${-offset} stroke-linecap="round" style=${{ transition: 'stroke-dasharray 1s ease' }} />`;
+              offset += len;
+              return el;
+            })}
+          </svg>
+          <div class="donut-center">
+            <div class="big">${total}</div>
+            <div class="small">Fellows</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function FellowCard({ p, onClick, tags }) {
+      const [imgErr, setImgErr] = useState(false);
+      const initials = `${p.name[0] || ''}${p.lastName[0] || ''}`;
+      const industryTags = (tags?.industries || []).slice(0, 2);
+      return html`
+        <div class="fellow-card" onClick=${onClick}>
+          ${p.linkedin && html`
+            <a class="li" href=${p.linkedin} target="_blank" rel="noopener" onClick=${(e) => e.stopPropagation()} title="LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+          `}
+          ${p.photo && !imgErr
+            ? html`<img class="fellow-avatar" src=${p.photo} alt=${p.name} onError=${() => setImgErr(true)} />`
+            : html`<div class="fellow-avatar placeholder">${initials}</div>`}
+          <div class="fellow-name">${p.name} ${p.lastName}</div>
+          <div class="fellow-meta">
+            <span>${COUNTRY_FLAGS[normalizeCountry(p.country)] || '🌍'}</span>
+            <span>${normalizeCountry(p.country)}</span>
+          </div>
+          <div class=${`fellow-batch b${p.batch}`}>Batch ${p.batch}</div>
+          ${industryTags.length > 0 && html`
+            <div class="fellow-tags">
+              ${industryTags.map(t => html`<span class="ftag" key=${t}>${INDUSTRY_META[t]?.icon || ''} ${t}</span>`)}
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    function Modal({ p, onClose, tags }) {
+      useEffect(() => {
+        if (!p) return;
+        const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+        document.addEventListener('keydown', onKey);
+        document.body.style.overflow = 'hidden';
+        return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = ''; };
+      }, [p, onClose]);
+      if (!p) return null;
+      const initials = `${p.name[0] || ''}${p.lastName[0] || ''}`;
+      const industries = tags?.industries || [];
+      const roles = tags?.roles || [];
+      return html`
+        <div class="modal-bg" onClick=${onClose}>
+          <div class="modal" onClick=${(e) => e.stopPropagation()}>
+            <button class="modal-close" onClick=${onClose}>×</button>
+            <div class="modal-header">
+              ${p.photo
+                ? html`<img class="modal-avatar" src=${p.photo} alt=${p.name} />`
+                : html`<div class="modal-avatar" style=${{ background: 'var(--eurotech-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--eurotech-blue)', fontWeight: 700, fontSize: '28px' }}>${initials}</div>`}
+              <div>
+                <h3>${p.name} ${p.lastName}</h3>
+                <div class="modal-meta">${p.city || normalizeCountry(p.country)}</div>
+                ${tags?.company && html`<div style=${{ color: 'var(--eurotech-blue)', fontWeight: 600, fontSize: '13px', marginTop: '4px' }}>${tags.company}</div>`}
+                <div class="modal-tags">
+                  <span class="tag">${COUNTRY_FLAGS[normalizeCountry(p.country)] || '🌍'} ${normalizeCountry(p.country)}</span>
+                  <span class="tag">Batch ${p.batch}</span>
+                  ${industries.map(t => html`<span class="tag" key=${t} style=${{ background: (INDUSTRY_META[t]?.color || '#123192') + '1a', color: INDUSTRY_META[t]?.color || 'var(--eurotech-blue)' }}>${INDUSTRY_META[t]?.icon || ''} ${t}</span>`)}
+                  ${roles.map(t => html`<span class="tag" key=${t} style=${{ background: (ROLE_COLORS[t] || '#123192') + '1a', color: ROLE_COLORS[t] || 'var(--eurotech-blue)' }}>${t}</span>`)}
+                </div>
+              </div>
+            </div>
+            ${p.ongoingProjectsSummary && html`
+              <div>
+                <div class="modal-bio-label">Ongoing work</div>
+                <div class="modal-bio">${p.ongoingProjectsSummary}</div>
+              </div>
+            `}
+            ${p.linkedin && html`
+              <a class="modal-cta" href=${p.linkedin} target="_blank" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                Connect on LinkedIn
+              </a>
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    function App() {
+      const [fellows, setFellows] = useState([]);
+      const [enrichment, setEnrichment] = useState({ industries: {}, roles: {}, fellowTags: {} });
+      const [loading, setLoading] = useState(true);
+      const [q, setQ] = useState('');
+      const [batchFilter, setBatchFilter] = useState('all');
+      const [countryFilter, setCountryFilter] = useState('all');
+      const [industryFilter, setIndustryFilter] = useState('all');
+      const [open, setOpen] = useState(null);
+
+      useEffect(() => {
+        Promise.all([
+          fetch('./fellows.json').then(r => r.json()),
+          fetch('./enrichment.json').then(r => r.json()).catch(() => ({ industries: {}, roles: {}, fellowTags: {} })),
+        ]).then(([f, e]) => {
+          setFellows(f);
+          setEnrichment(e);
+          setLoading(false);
+        }).catch(() => setLoading(false));
+      }, []);
+
+      const stats = useMemo(() => {
+        const countries = {};
+        const batches = { 1: 0, 2: 0 };
+        fellows.forEach(p => {
+          const c = normalizeCountry(p.country);
+          countries[c] = (countries[c] || 0) + 1;
+          batches[p.batch] = (batches[p.batch] || 0) + 1;
+        });
+        const sortedCountries = Object.entries(countries)
+          .map(([name, value]) => ({ name, value }))
+          .sort((a, b) => b.value - a.value);
+        return {
+          total: fellows.length,
+          batches,
+          countries: sortedCountries,
+          uniqueCountries: sortedCountries.length,
+          withBio: fellows.filter(p => p.ongoingProjectsSummary).length,
+        };
+      }, [fellows]);
+
+      const filtered = useMemo(() => {
+        return fellows.filter(p => {
+          const matchesQ = !q || (`${p.name} ${p.lastName} ${p.country} ${p.city || ''}`).toLowerCase().includes(q.toLowerCase());
+          const matchesBatch = batchFilter === 'all' || p.batch === Number(batchFilter);
+          const matchesCountry = countryFilter === 'all' || normalizeCountry(p.country) === countryFilter;
+          const tags = enrichment.fellowTags?.[p.id];
+          const matchesIndustry = industryFilter === 'all' || (tags && tags.industries.includes(industryFilter));
+          return matchesQ && matchesBatch && matchesCountry && matchesIndustry;
+        });
+      }, [fellows, q, batchFilter, countryFilter, industryFilter, enrichment]);
+
+      const industryEntries = Object.entries(enrichment.industries || {}).sort((a,b) => b[1]-a[1]);
+      const roleEntries = Object.entries(enrichment.roles || {}).sort((a,b) => b[1]-a[1]);
+      const uniEntries = Object.entries(enrichment.universities || {}).sort((a,b) => b[1]-a[1]).slice(0, 12);
+      const industryMax = industryEntries[0]?.[1] || 1;
+      const uniMax = uniEntries[0]?.[1] || 1;
+      const enrichedCount = Object.keys(enrichment.fellowTags || {}).length;
+
+      const topCountries = stats.countries.slice(0, 10);
+      const max = topCountries[0]?.value || 1;
+
+      // Treemap-ish sizing: top 8 countries
+      const treemapData = stats.countries.slice(0, 8);
+      const tmTotal = treemapData.reduce((s, d) => s + d.value, 0);
+      // Map to grid spans (12 col total, ~ 4 rows of 80px)
+      const tmTiles = treemapData.map((d, i) => {
+        const ratio = d.value / tmTotal;
+        // ensure decent sizing
+        let cols, rows;
+        if (i === 0) { cols = 7; rows = 2; }
+        else if (i === 1) { cols = 5; rows = 2; }
+        else if (i === 2) { cols = 4; rows = 2; }
+        else if (i === 3) { cols = 4; rows = 1; }
+        else if (i === 4) { cols = 4; rows = 1; }
+        else if (i === 5) { cols = 4; rows = 1; }
+        else if (i === 6) { cols = 4; rows = 1; }
+        else { cols = 4; rows = 1; }
+        return { ...d, cols, rows, opacity: 0.5 + ratio * 2 };
+      });
+
+      if (loading) {
+        return html`<div class="app"><div style=${{ padding: '120px 0', textAlign: 'center', color: 'var(--muted)' }}>Loading fellows…</div></div>`;
+      }
+
+      return html`
+        <div class="app">
+          <section class="hero">
+            <div class="hero-inner">
+              <div class="eyebrow"><span class="dot"></span> EuroTech Federation · Fellows Atlas</div>
+              <h1>Europe's brightest <span class="accent">tech minds</span>, mapped.</h1>
+              <p class="lede">A living portrait of the EuroTech Fellowship — ${stats.total} founders, builders and researchers across ${stats.uniqueCountries} countries, shaping the next generation of European technology.</p>
+              <div class="stat-strip">
+                <div class="stat-card">
+                  <div class="label">Fellows</div>
+                  <div class="value"><${CountUp} end=${stats.total} /></div>
+                  <div class="suffix">across all cohorts</div>
+                </div>
+                <div class="stat-card">
+                  <div class="label">Countries</div>
+                  <div class="value"><${CountUp} end=${stats.uniqueCountries} /></div>
+                  <div class="suffix">represented</div>
+                </div>
+                <div class="stat-card">
+                  <div class="label">Cohorts</div>
+                  <div class="value">2</div>
+                  <div class="suffix">batches launched</div>
+                </div>
+                <div class="stat-card">
+                  <div class="label">Profiles</div>
+                  <div class="value"><${CountUp} end=${stats.withBio} /></div>
+                  <div class="suffix">with detailed bios</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="grid-2">
+              <div class="card">
+                <h3>Geographic distribution</h3>
+                <div class="card-sub">Top countries by fellow count</div>
+                <div class="bars">
+                  ${topCountries.map(c => html`
+                    <div class="bar-row" key=${c.name}>
+                      <div class="country">
+                        <span class="flag">${COUNTRY_FLAGS[c.name] || '🌍'}</span>
+                        <span>${c.name}</span>
+                      </div>
+                      <div class="bar-track">
+                        <div class="bar-fill" style=${{ width: `${(c.value / max) * 100}%` }}></div>
+                      </div>
+                      <div class="count">${c.value}</div>
+                    </div>
+                  `)}
+                </div>
+              </div>
+              <div class="card">
+                <h3>Cohort breakdown</h3>
+                <div class="card-sub">Fellowship by intake batch</div>
+                <div class="donut-wrap">
+                  <${Donut} data=${[
+                    { value: stats.batches[1] || 0, color: '#123192' },
+                    { value: stats.batches[2] || 0, color: '#5cbbf6' },
+                  ]} />
+                  <div class="legend">
+                    <div class="legend-row">
+                      <div class="legend-dot" style=${{ background: '#123192' }}></div>
+                      <div class="legend-info">
+                        <div class="name">Batch 1</div>
+                        <div class="meta">Founding cohort</div>
+                      </div>
+                      <div class="pct">${stats.batches[1] || 0}</div>
+                    </div>
+                    <div class="legend-row">
+                      <div class="legend-dot" style=${{ background: '#5cbbf6' }}></div>
+                      <div class="legend-info">
+                        <div class="name">Batch 2</div>
+                        <div class="meta">Current cohort</div>
+                      </div>
+                      <div class="pct">${stats.batches[2] || 0}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="section-head">
+              <div>
+                <h2>European footprint</h2>
+                <div class="subtitle">Proportional view — bigger tile, bigger presence.</div>
+              </div>
+            </div>
+            <div class="card" style=${{ padding: 20 }}>
+              <div class="treemap">
+                ${tmTiles.map((t, i) => html`
+                  <div class="tile" key=${i} style=${{
+                    gridColumn: `span ${t.cols}`,
+                    gridRow: `span ${t.rows}`,
+                    background: `linear-gradient(135deg, hsl(${220 - i * 8}, ${60 + i * 2}%, ${35 + i * 4}%) 0%, hsl(${210 - i * 6}, 80%, ${50 + i * 4}%) 100%)`,
+                  }}>
+                    <div class="tile-flag">${COUNTRY_FLAGS[t.name] || '🌍'}</div>
+                    <div>
+                      <div class="tile-name">${t.name}</div>
+                      <div class="tile-count">${t.value}</div>
+                    </div>
+                  </div>
+                `)}
+              </div>
+            </div>
+          </section>
+
+          ${industryEntries.length > 0 && html`
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2>What they're building</h2>
+                  <div class="subtitle">Industries detected across ${enrichedCount} fellow bios · click to filter</div>
+                </div>
+              </div>
+              <div class="industry-grid">
+                ${industryEntries.map(([name, count]) => {
+                  const meta = INDUSTRY_META[name] || { icon: '✨', color: '#64748b' };
+                  const isActive = industryFilter === name;
+                  return html`
+                    <div
+                      class="industry-card"
+                      key=${name}
+                      onClick=${() => setIndustryFilter(isActive ? 'all' : name)}
+                      style=${{
+                        cursor: 'pointer',
+                        '--w': `${(count / industryMax) * 100}%`,
+                        borderColor: isActive ? meta.color : 'var(--border)',
+                        boxShadow: isActive ? `0 8px 24px ${meta.color}33` : 'none',
+                      }}>
+                      <div class="icon">${meta.icon}</div>
+                      <div class="iname">${name}</div>
+                      <div class="icount" style=${{ color: meta.color }}>${count}</div>
+                      <div class="ipct">${Math.round((count / enrichedCount) * 100)}% of profiled fellows</div>
+                    </div>
+                  `;
+                })}
+              </div>
+            </section>
+          `}
+
+          ${uniEntries.length > 0 && html`
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2>Top institutions</h2>
+                  <div class="subtitle">Universities mentioned by fellows · ETH, EPFL, TUM, Bocconi and more</div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="bars">
+                  ${uniEntries.map(([name, value]) => html`
+                    <div class="bar-row" key=${name}>
+                      <div class="country"><span class="flag">🎓</span><span>${name}</span></div>
+                      <div class="bar-track"><div class="bar-fill" style=${{ width: `${(value / uniMax) * 100}%`, background: 'linear-gradient(90deg, #7c3aed, #5cbbf6)' }}></div></div>
+                      <div class="count">${value}</div>
+                    </div>
+                  `)}
+                </div>
+              </div>
+            </section>
+          `}
+
+          ${roleEntries.length > 0 && html`
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2>The shape of the fellowship</h2>
+                  <div class="subtitle">Roles & profiles detected across bios</div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="role-pills">
+                  ${roleEntries.map(([role, count]) => html`
+                    <div class="role-pill" key=${role}>
+                      <span class="rdot" style=${{ background: ROLE_COLORS[role] || '#64748b' }}></span>
+                      <span class="rname">${role}</span>
+                      <span class="rcount">${count}</span>
+                    </div>
+                  `)}
+                </div>
+              </div>
+            </section>
+          `}
+
+          <section class="section">
+            <div class="section-head">
+              <div>
+                <h2>Meet the fellows</h2>
+                <div class="subtitle">${filtered.length} of ${stats.total} fellows · click any card for full profile</div>
+              </div>
+              ${industryFilter !== 'all' && html`
+                <button class="chip active" onClick=${() => setIndustryFilter('all')}>
+                  ${INDUSTRY_META[industryFilter]?.icon || ''} ${industryFilter} ×
+                </button>
+              `}
+            </div>
+            <div class="filter-bar">
+              <input
+                class="filter-input"
+                placeholder="Search by name, country or city…"
+                value=${q}
+                onInput=${(e) => setQ(e.target.value)}
+              />
+              <button class=${`chip ${batchFilter === 'all' ? 'active' : ''}`} onClick=${() => setBatchFilter('all')}>All cohorts<span class="num">${stats.total}</span></button>
+              <button class=${`chip ${batchFilter === '1' ? 'active' : ''}`} onClick=${() => setBatchFilter('1')}>Batch 1<span class="num">${stats.batches[1] || 0}</span></button>
+              <button class=${`chip ${batchFilter === '2' ? 'active' : ''}`} onClick=${() => setBatchFilter('2')}>Batch 2<span class="num">${stats.batches[2] || 0}</span></button>
+              <select
+                class="chip"
+                style=${{ paddingRight: 24, cursor: 'pointer', border: 'none', appearance: 'none', backgroundImage: 'url("data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%2710%27 height=%276%27 viewBox=%270 0 10 6%27><path d=%27M1 1l4 4 4-4%27 stroke=%27%2364748b%27 stroke-width=%271.5%27 fill=%27none%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/></svg>")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 8px center' }}
+                value=${countryFilter}
+                onChange=${(e) => setCountryFilter(e.target.value)}>
+                <option value="all">All countries</option>
+                ${stats.countries.map(c => html`<option key=${c.name} value=${c.name}>${COUNTRY_FLAGS[c.name] || ''} ${c.name} (${c.value})</option>`)}
+              </select>
+            </div>
+            <div class="fellows-grid">
+              ${filtered.map(p => html`<${FellowCard} key=${p.id} p=${p} tags=${enrichment.fellowTags?.[p.id]} onClick=${() => setOpen(p)} />`)}
+            </div>
+            ${filtered.length === 0 && html`<div style=${{ padding: '40px', textAlign: 'center', color: 'var(--muted)' }}>No fellows match those filters.</div>`}
+          </section>
+
+          <div class="foot">
+            Data from <a href="https://www.eurotech-federation.com/community/people" target="_blank">eurotech-federation.com</a> · Tags inferred from ${enrichedCount} fellow bios via NLP · A vibe-coded snapshot of the Fellowship.
+          </div>
+          <${Modal} p=${open} onClose=${() => setOpen(null)} tags=${open ? enrichment.fellowTags?.[open.id] : null} />
+        </div>
+      `;
+    }
+
+    createRoot(document.getElementById('root')).render(html`<${App} />`);
+  </script>
+</body>
+</html>

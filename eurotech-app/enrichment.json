@@ -1,0 +1,850 @@
+{
+  "industries": {
+    "Climate/Energy": 2,
+    "Biotech/Health": 8,
+    "AI/ML": 41,
+    "Fintech": 5,
+    "Developer tools": 4,
+    "LegalTech": 6,
+    "Space/Defense": 5,
+    "Robotics/Hardware": 9,
+    "Quantum/Deep tech": 2,
+    "Mobility": 2,
+    "Cybersecurity": 1
+  },
+  "roles": {
+    "Founder/Builder": 47,
+    "Researcher/PhD": 17,
+    "Engineer/Developer": 7,
+    "Operator": 2,
+    "CEO/CTO/COO": 5,
+    "Investor/VC": 2,
+    "Student": 3
+  },
+  "universities": {
+    "IE University": 1,
+    "Bocconi": 3,
+    "TUM": 4,
+    "EPFL": 3,
+    "ETH": 3,
+    "MIT": 1,
+    "Harvard": 1,
+    "UC Berkeley": 1,
+    "Berkeley": 1,
+    "RWTH": 1,
+    "Stanford": 2,
+    "Imperial College": 1
+  },
+  "fellowTags": {
+    "cmnqlvtni0001l104uvi79m67": {
+      "industries": [
+        "Climate/Energy"
+      ],
+      "roles": [
+        "Founder/Builder",
+        "Researcher/PhD"
+      ],
+      "universities": []
+    },
+    "cmnohcozt0001js04h49ftizi": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnp3uhnh0001k1042urvdd3f": {
+      "industries": [
+        "Biotech/Health"
+      ],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": [
+        "IE University"
+      ]
+    },
+    "cmnu9maxx0001jv049wevzg6p": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [
+        "Researcher/PhD"
+      ],
+      "universities": []
+    },
+    "cmnrkm3lp0001l5041krq3f94": {
+      "industries": [],
+      "roles": [],
+      "universities": []
+    },
+    "cmnohs3g80001la04vlo91tfg": {
+      "industries": [],
+      "roles": [],
+      "universities": [
+        "Bocconi"
+      ]
+    },
+    "cmnogdnbp0001jr0400lz4430": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnyqgkpd000004l5ez74y5zx": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmnodyof60009kz04eqvn61nn": {
+      "industries": [
+        "AI/ML",
+        "Fintech"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmnqa5d9t0001l904ewbqfw67": {
+      "industries": [
+        "AI/ML",
+        "Developer tools",
+        "LegalTech"
+      ],
+      "roles": [
+        "Founder/Builder",
+        "Engineer/Developer"
+      ],
+      "universities": []
+    },
+    "cmnw7krir0001l8046o1opj7v": {
+      "industries": [],
+      "roles": [],
+      "universities": []
+    },
+    "cmnuxeq6z0001lb04bppugb4a": {
+      "industries": [
+        "AI/ML",
+        "Space/Defense",
+        "LegalTech"
+      ],
+      "roles": [
+        "Founder/Builder",
+        "Engineer/Developer"
+      ],
+      "universities": []
+    },
+    "cmnr80iws0001jt046gd0g0rs": {
+      "industries": [
+        "AI/ML",
+        "Robotics/Hardware"
+      ],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnxpfqxo0001jq04lrxanicx": {
+      "industries": [
+        "AI/ML",
+        "Robotics/Hardware"
+      ],
+      "roles": [
+        "Founder/Builder",
+        "Engineer/Developer"
+      ],
+      "universities": []
+    },
+    "cmnosbsnw0001la04ji0q5fwt": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmo6aj80c006w1t1k10mernls": {
+      "industries": [],
+      "roles": [],
+      "universities": []
+    },
+    "cmnpst0uq0001jr04msr38deo": {
+      "industries": [
+        "Space/Defense"
+      ],
+      "roles": [
+        "Founder/Builder",
+        "Operator"
+      ],
+      "universities": []
+    },
+    "cmnrxf83o0001l404ci3pmfqd": {
+      "industries": [
+        "Fintech"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmnp5qx2i0001kw04ou9v7ugg": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnor414s0001lg04i23us6z7": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [
+        "Founder/Builder",
+        "Researcher/PhD"
+      ],
+      "universities": []
+    },
+    "cmnow1jtl0006l804bvd7lmlh": {
+      "industries": [],
+      "roles": [],
+      "universities": []
+    },
+    "cmnow2udv000al8040wwqmap2": {
+      "industries": [
+        "AI/ML",
+        "Biotech/Health",
+        "Quantum/Deep tech"
+      ],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": [
+        "TUM"
+      ]
+    },
+    "cmo6aiiet001h1t1k7exgcic4": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [
+        "Founder/Builder",
+        "Researcher/PhD"
+      ],
+      "universities": []
+    },
+    "cmnp1jzv20001la04v3pb25ll": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnogisqq0001ju048w3zx4cz": {
+      "industries": [
+        "AI/ML",
+        "Biotech/Health"
+      ],
+      "roles": [
+        "Founder/Builder",
+        "Engineer/Developer"
+      ],
+      "universities": [
+        "TUM"
+      ]
+    },
+    "cmnpy59rk0001l8046ixz8h93": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnq5bwhf0001jx04fpqs7q89": {
+      "industries": [
+        "AI/ML",
+        "Biotech/Health",
+        "Mobility"
+      ],
+      "roles": [
+        "Founder/Builder",
+        "Researcher/PhD"
+      ],
+      "universities": [
+        "EPFL"
+      ]
+    },
+    "cmnpbnz6n0001la04z0uxb7lr": {
+      "industries": [
+        "Robotics/Hardware"
+      ],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnovtm0n0001l804ugmoiwa4": {
+      "industries": [
+        "AI/ML",
+        "Robotics/Hardware"
+      ],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnp4fu2e000ck104w1fkike6": {
+      "industries": [],
+      "roles": [],
+      "universities": []
+    },
+    "cmnpn8rpj0001l204408ygv3m": {
+      "industries": [],
+      "roles": [],
+      "universities": [
+        "ETH"
+      ]
+    },
+    "cmnoe79vq0001l704dbyte574": {
+      "industries": [
+        "AI/ML",
+        "LegalTech"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmnwwdv870001jr04my4vp5jp": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder",
+        "CEO/CTO/COO"
+      ],
+      "universities": []
+    },
+    "cmnsjlzui0001jx04mz3grll0": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder",
+        "CEO/CTO/COO"
+      ],
+      "universities": []
+    },
+    "cmnoxbd8e0001jp04m8ztocr3": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmo6aim6h002h1t1k38zrv87t": {
+      "industries": [
+        "Fintech"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmnor4rfb0001jy04tga3hnm8": {
+      "industries": [],
+      "roles": [],
+      "universities": [
+        "ETH"
+      ]
+    },
+    "cmnportwo0001la043dbc1zko": {
+      "industries": [],
+      "roles": [],
+      "universities": []
+    },
+    "cmnqp31mu0001kt04wl5ab9tq": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmo6aipn200351t1kk0v9g3qa": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnw6s12c0001l104fql1px18": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmo6aiqsj003b1t1kvpmfnlou": {
+      "industries": [
+        "AI/ML",
+        "LegalTech"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmnxe370j0001l504a0kfgloi": {
+      "industries": [
+        "AI/ML",
+        "Robotics/Hardware"
+      ],
+      "roles": [
+        "Researcher/PhD"
+      ],
+      "universities": [
+        "TUM"
+      ]
+    },
+    "cmnodtjk10001kz04od44xdz9": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmnp473t40008k104x9nz0hwo": {
+      "industries": [],
+      "roles": [],
+      "universities": []
+    },
+    "cmnooszqn0001l804pbvlttif": {
+      "industries": [
+        "Climate/Energy"
+      ],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnp9ma3e0001k4046mvcwzgo": {
+      "industries": [
+        "AI/ML",
+        "Biotech/Health",
+        "Space/Defense"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmnojybik0008jo04fitu0l0g": {
+      "industries": [
+        "AI/ML",
+        "Robotics/Hardware"
+      ],
+      "roles": [
+        "Founder/Builder",
+        "Engineer/Developer"
+      ],
+      "universities": []
+    },
+    "cmnsrt7g40001jp04sir4prxm": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmnspe2c30001l604eitntrhf": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnogambt000al704nstzo7i4": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmnxb7n3k0001lf04d4tnpbga": {
+      "industries": [
+        "Space/Defense"
+      ],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnojonoo0001jo04b6ye8z8p": {
+      "industries": [
+        "AI/ML",
+        "Biotech/Health",
+        "Mobility"
+      ],
+      "roles": [
+        "Researcher/PhD",
+        "Engineer/Developer"
+      ],
+      "universities": []
+    },
+    "cmnqqd4s80001l504pmf68fat": {
+      "industries": [],
+      "roles": [
+        "Researcher/PhD"
+      ],
+      "universities": []
+    },
+    "cmo6aix26004q1t1kdvncofuo": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmnr8ewrb0007jt04tphjlt4b": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnoep9810004l70444xikesg": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnoeu7ag0007l704f2ndte5k": {
+      "industries": [
+        "AI/ML",
+        "LegalTech"
+      ],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmntg4rxu0001jo04zzg0tafm": {
+      "industries": [
+        "AI/ML",
+        "Biotech/Health"
+      ],
+      "roles": [
+        "Founder/Builder",
+        "Engineer/Developer"
+      ],
+      "universities": []
+    },
+    "cmnp3vhjw0004k104q29z5ar3": {
+      "industries": [
+        "AI/ML",
+        "Biotech/Health"
+      ],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnu3ow540001ju04qckw8sl7": {
+      "industries": [],
+      "roles": [],
+      "universities": []
+    },
+    "cmnofw3b30001ju04jg4h1v2g": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmnq31wh30001jl04j5iuexae": {
+      "industries": [],
+      "roles": [],
+      "universities": []
+    },
+    "cmnq1f1ha0001l504acy337xp": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": [
+        "MIT",
+        "Harvard"
+      ]
+    },
+    "cmnodepq10001kz04hut82zat": {
+      "industries": [],
+      "roles": [],
+      "universities": []
+    },
+    "cmnrypz600001l404pe2fohsc": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmnpchklc0001l704p0rzfgjn": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [],
+      "universities": [
+        "UC Berkeley",
+        "Berkeley"
+      ]
+    },
+    "cmnrp2mxl0001js042bzpmp0u": {
+      "industries": [
+        "Robotics/Hardware",
+        "Space/Defense"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmnodwd0r0004kz04kk30i5c3": {
+      "industries": [
+        "Cybersecurity"
+      ],
+      "roles": [
+        "Researcher/PhD"
+      ],
+      "universities": []
+    },
+    "cmnophnxz0004l804b0awbefp": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnoqbfpl0001l204r9a7anbp": {
+      "industries": [
+        "Developer tools"
+      ],
+      "roles": [
+        "Founder/Builder",
+        "Researcher/PhD"
+      ],
+      "universities": []
+    },
+    "cmnodgzrr0004kz04u0db4bo1": {
+      "industries": [
+        "AI/ML",
+        "Fintech"
+      ],
+      "roles": [
+        "Researcher/PhD",
+        "Investor/VC",
+        "Student"
+      ],
+      "universities": [
+        "RWTH"
+      ]
+    },
+    "cmkfuegak001xyu7fb9yey39j": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnt9u7390001jl048nd2rq9m": {
+      "industries": [],
+      "roles": [
+        "Researcher/PhD"
+      ],
+      "universities": [
+        "Stanford"
+      ]
+    },
+    "cmnojsi0e0001l2040kia7032": {
+      "industries": [],
+      "roles": [],
+      "universities": []
+    },
+    "cmnphy34q0001jm0429etjopw": {
+      "industries": [
+        "Robotics/Hardware"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmnolq0px0001jp04wu3tt9ft": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnomjbue0001jm04n159nrmz": {
+      "industries": [
+        "Quantum/Deep tech"
+      ],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmnoqd5eu0004l204w05dubnj": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": []
+    },
+    "cmo6aj6sb006n1t1kietlspwi": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [
+        "Researcher/PhD"
+      ],
+      "universities": [
+        "Stanford"
+      ]
+    },
+    "cmo6aj7a8006q1t1kjosg95jr": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [],
+      "universities": []
+    },
+    "cmnw5345q0001jm041h36fqj4": {
+      "industries": [],
+      "roles": [
+        "CEO/CTO/COO"
+      ],
+      "universities": []
+    },
+    "cmo6aicsx00021t1k2w92rnut": {
+      "industries": [
+        "LegalTech"
+      ],
+      "roles": [
+        "Researcher/PhD"
+      ],
+      "universities": [
+        "ETH"
+      ],
+      "company": "ETH Zurich Law, Economics & Data Science"
+    },
+    "cmo6aidaf00051t1ksawap5p1": {
+      "industries": [
+        "AI/ML",
+        "Robotics/Hardware"
+      ],
+      "roles": [
+        "CEO/CTO/COO",
+        "Founder/Builder"
+      ],
+      "universities": [],
+      "company": "Marso Robotics (Head of AI)"
+    },
+    "cmo6aied6000e1t1k5ngd0v8z": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [
+        "Researcher/PhD"
+      ],
+      "universities": [
+        "EPFL"
+      ],
+      "company": "EPFL AI Team"
+    },
+    "cmo6aiep7000h1t1kto2b303t": {
+      "industries": [
+        "Fintech"
+      ],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": [],
+      "company": "Normandy Business School (Finance)"
+    },
+    "cmo6aifl2000q1t1kr25vk5mh": {
+      "industries": [
+        "Developer tools"
+      ],
+      "roles": [
+        "Operator"
+      ],
+      "universities": [
+        "TUM"
+      ],
+      "company": "remberg"
+    },
+    "cmo6aifwe000t1t1k7tlbmyvq": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": [],
+      "company": "UBooks (Founder)"
+    },
+    "cmo6aihqq001b1t1k2fxdnslg": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder",
+        "Student"
+      ],
+      "universities": [
+        "Bocconi"
+      ],
+      "company": "Bocconi University · JEME co-founder"
+    },
+    "cmo6aii3e001e1t1kc50j092j": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [
+        "Investor/VC",
+        "Researcher/PhD"
+      ],
+      "universities": [
+        "EPFL"
+      ],
+      "company": "Founderful Campus (VC) · ex-BCG · ex-Google"
+    },
+    "cmo6aiizs001n1t1kii6bi7t1": {
+      "industries": [],
+      "roles": [
+        "Founder/Builder"
+      ],
+      "universities": [
+        "Imperial College"
+      ],
+      "company": "Stealth Startup"
+    },
+    "cmo6aiklz00221t1ksoetuhno": {
+      "industries": [
+        "AI/ML"
+      ],
+      "roles": [
+        "Researcher/PhD",
+        "Student"
+      ],
+      "universities": [
+        "Bocconi"
+      ],
+      "company": "Bocconi (Data Science) · ex-Mastercard"
+    },
+    "cmo6aieyo000k1t1klz8rdyp6": {
+      "industries": [
+        "Developer tools"
+      ],
+      "roles": [
+        "Founder/Builder",
+        "CEO/CTO/COO"
+      ],
+      "universities": [],
+      "company": "Ecrin Digital (CEO), .NET Foundation member"
+    }
+  },
+  "meta": {
+    "bioParsedCount": 93,
+    "linkupEnrichedCount": 11,
+    "lastUpdated": "2026-05-19T15:46:51.401Z"
+  }
+}
